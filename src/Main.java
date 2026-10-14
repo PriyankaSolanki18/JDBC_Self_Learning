@@ -1,26 +1,42 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Main {
-    public static void main(String[] args) {
-        //Database url
-        String url = "jdbc:mysql://localhost:3306/Students";
-
-        //Database credentials
+    public static void main(String[] args) throws ClassNotFoundException {
+        String url = "jdbc:mysql://localhost:3306/mydatabase";
         String username = "root";
         String password = "Solanki@18#";
 
-        //Establish the connection
-        try(Connection connection = DriverManager.getConnection(url,username,password)){
-            System.out.println("Connected to the database");
-            System.out.println(connection);
+        String query = "select * from employees;";
 
-            //Perform database operations here
-
-        }catch (SQLException e){
-            System.out.println("Connection failed: "+e.getMessage());
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            System.out.println("Drivers loaded successfully");
+        }catch (ClassNotFoundException e){
+            System.out.println(e.getMessage());
         }
+
+        try{
+            Connection con = DriverManager.getConnection(url,username,password);
+            System.out.println("Connection established successfully");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()){
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String job_title = rs.getString("job_title");
+                double salary = rs.getDouble("salary");
+                System.out.println("======================================================================");
+                System.out.println("ID: "+id+", Name: "+name+", Job Title: "+job_title+", Salary: "+salary);
+                System.out.println("======================================================================");
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+            System.out.println("Connection closed successfully");
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+
 
     }
 }
