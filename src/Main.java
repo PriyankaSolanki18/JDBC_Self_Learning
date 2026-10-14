@@ -7,7 +7,8 @@ public class Main {
         String password = "Solanki@18#";
 
         //String query = "select * from employees;";
-        String query = "insert into employees(id,name,job_title,salary) values(3,'Radha','AI Engineer',100000);";
+        //String query = "insert into employees(id,name,job_title,salary) values(3,'Radha','AI Engineer',100000);";
+        String query = "delete from employees where id=2;";
 
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -34,12 +35,21 @@ public class Main {
 //            rs.close();
 
             //INSERTING DATA INTO DB:
+//            int rowsaffected = stmt.executeUpdate(query);
+//            if(rowsaffected > 0){
+//                System.out.println("Insert Successfull "+rowsaffected+" row(s) affected");
+//            }else{
+//                System.out.println("Insertion Failed");
+//            }
+
+            //DELETING DATA FROM DB:
             int rowsaffected = stmt.executeUpdate(query);
             if(rowsaffected > 0){
-                System.out.println("Insert Successfull "+rowsaffected+" row(s) affected");
+                System.out.println("Deletion successful "+rowsaffected+" rows(s) affected");
             }else{
-                System.out.println("Insertion Failed");
+                System.out.println("Deletion failed");
             }
+
 
             stmt.close();
             con.close();
