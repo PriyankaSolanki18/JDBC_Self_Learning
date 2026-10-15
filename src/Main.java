@@ -8,7 +8,8 @@ public class Main {
 
         //String query = "select * from employees;";
         //String query = "insert into employees(id,name,job_title,salary) values(3,'Radha','AI Engineer',100000);";
-        String query = "delete from employees where id=2;";
+        //String query = "delete from employees where id=2;";
+        String query = "update employees set name='Krishna', salary=85000 where id=1;";
 
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -43,11 +44,19 @@ public class Main {
 //            }
 
             //DELETING DATA FROM DB:
+//            int rowsaffected = stmt.executeUpdate(query);
+//            if(rowsaffected > 0){
+//                System.out.println("Deletion successful "+rowsaffected+" rows(s) affected");
+//            }else{
+//                System.out.println("Deletion failed");
+//            }
+
+            //UPDATING DATA IN DB:
             int rowsaffected = stmt.executeUpdate(query);
             if(rowsaffected > 0){
-                System.out.println("Deletion successful "+rowsaffected+" rows(s) affected");
+                System.out.println("Updation successful "+rowsaffected+" rows(s) affected");
             }else{
-                System.out.println("Deletion failed");
+                System.out.println("Updation failed");
             }
 
 
