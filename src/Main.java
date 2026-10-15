@@ -59,7 +59,6 @@ public class Main {
                 System.out.println("Updation failed");
             }
 
-
             stmt.close();
             con.close();
             System.out.println("Connection closed successfully");
